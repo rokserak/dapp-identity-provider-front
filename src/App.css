@@ -1,0 +1,64 @@
+.App {
+  background-color: darkolivegreen;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 1.5vmin);
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.grid-container {
+  display: grid;
+  grid-row-gap: 25px;
+}
+
+.grid-row {
+  grid-column-start: 1;
+  grid-column-end: 1;
+}
+
+.address-text {
+  font-size: calc(4px + 1vmin);
+}
+
+.email-text {
+  font-size: calc(6px + 1vmin);
+}
+
+.profile-card {
+  background-color: beige;
+  color: coral;
+  padding: 2vmin;
+}
+
+.profile-item {
+  padding-bottom: 15px;
+}
