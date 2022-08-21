@@ -171,7 +171,7 @@ export const Symfoni: React.FC<SymfoniProps> = ({
 
     const getIdentityProvider = (_provider: providers.Provider, _signer?: Signer) => {
 
-        const contractAddress = "0x383F54aDf5A35F7988e9D5CD8B6738e86E9A0a34"
+        const contractAddress = "0x3C5cB31f133c7A6F62287FA565074D1d9df37918"
         const instance = _signer ? IdentityProvider__factory.connect(contractAddress, _signer) : IdentityProvider__factory.connect(contractAddress, _provider)
         const contract: SymfoniIdentityProvider = {
             instance: instance,

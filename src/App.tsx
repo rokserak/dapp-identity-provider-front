@@ -1,18 +1,32 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import './App.css'
 import { Symfoni } from './hardhat/SymfoniContext'
 import { IdentityForm } from './components/IdentityForm'
 import { IdentityProfile } from './components/IdentityProfile'
 import { Alert } from '@mui/material'
+import { LoadingButton } from "@mui/lab";
 
 function App() {
-  const [metamaskAvailable, setMetamaskAvailable] = React.useState(false)
+  const [metamaskAvailable, setMetamaskAvailable] = useState(false)
+  const [onSupportedNetwork, setOnSupportedNetwork] = useState(false)
 
   useEffect(() => {
     if (window.ethereum) {
       setMetamaskAvailable(true)
+      setOnSupportedNetwork(window.ethereum.networkVersion === process.env.REACT_APP_NETWORK_ID)
     }
   }, [])
+
+  const switchToSupportedNetwork = async () => {
+    window.ethereum.request({
+      method: 'wallet_switchEthereumChain',
+      params: [
+        {
+          chainId: '0x' + process.env.REACT_APP_NETWORK_ID,
+        }
+      ],
+    }).then(() => setOnSupportedNetwork(true))
+  }
 
   const [showContext, setShowContext] = React.useState<'edit-form' | 'profile-form'>('profile-form')
 
@@ -27,7 +41,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        {metamaskAvailable
+        {metamaskAvailable && onSupportedNetwork
         ? <div>
           <Symfoni autoInit={true}>
             {showContext === 'edit-form'
@@ -36,9 +50,20 @@ function App() {
             }
           </Symfoni>
         </div>
-        : <div>
-          <Alert severity="error">App requestes Metamask extension to operate, please install it and refresh tab</Alert>
-        </div>}
+        : !metamaskAvailable
+            ? <div>
+              <Alert severity="error">App requires Metamask extension to operate, please install it and refresh tab</Alert>
+            </div>
+            : <div>
+                <Alert severity="error">Unsupported network set in your Metamask wallet</Alert>
+                <LoadingButton variant="contained"
+                               type="submit"
+                               style={{ display: "block", marginTop: "10px", marginLeft: "auto", marginRight: "auto" }}
+                               onClick={switchToSupportedNetwork}>
+                  Switch to supported network
+                </LoadingButton>
+              </div>
+        }
       </header>
     </div>
   )
