@@ -123,7 +123,7 @@ export const IdentityForm: React.FC<Props> = (props: Props) => {
   }
 
   return (
-    <Card variant="outlined">
+    <Card variant="outlined" style={{ margin: 20 }}>
       <CardHeader title="Permanently store your Identity on Ethereum Platform" action={<IconButton onClick={props.onProfileClicked}>
         <Person />
       </IconButton>} />

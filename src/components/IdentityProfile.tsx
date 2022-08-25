@@ -32,7 +32,7 @@ export const IdentityProfile: React.FC<Props> = (props: Props) => {
   }, [identityProvider])
 
   return (
-    <Card variant="outlined">
+    <Card variant="outlined" style={{ margin: 20 }}>
       <CardHeader title="Your Ethereum Profile" action={<IconButton onClick={props.onEditClicked}>
         <Edit />
       </IconButton>} />
