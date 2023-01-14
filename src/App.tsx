@@ -13,7 +13,9 @@ function App() {
   useEffect(() => {
     if (window.ethereum) {
       setMetamaskAvailable(true)
-      setOnSupportedNetwork(window.ethereum.networkVersion === process.env.REACT_APP_NETWORK_ID)
+      setTimeout(() => {
+        setOnSupportedNetwork(window.ethereum.networkVersion === process.env.REACT_APP_NETWORK_ID)
+      }, 100)
     }
   }, [])
 
